@@ -3,14 +3,21 @@
 $dbPath = __DIR__ . "/db.sqlite";
 $conn = new PDO("sqlite:$dbPath");
 
+$url = filter_input(INPUT_POST, "url", FILTER_VALIDATE_URL);
+$title = filter_input(INPUT_POST, "titulo");
+if (!$url || !$title) {
+    header("Location: /index.php?success=0");
+    exit();
+}
+
 $query = "INSERT INTO videos (url, title) VALUES (?, ?)";
 $stmt = $conn->prepare($query);
-$stmt->bindValue(1, $_POST["url"]);
-$stmt->bindValue(2, $_POST["titulo"]);
+$stmt->bindValue(1, $url);
+$stmt->bindValue(2, $title);
 $result = $stmt->execute();
 
-if ($result === false) {
+if (!$result) {
     header("Location: /index.php?success=0");
-} else {
-    header("Location: /index.php?success=1");
+    exit();
 }
+header("Location: /index.php?success=1");
