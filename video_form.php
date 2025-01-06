@@ -3,7 +3,7 @@
 $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 if ($id) {
 
-    $dbPath = __DIR__ . "/../db.sqlite";
+    $dbPath = __DIR__ . "/db.sqlite";
     $conn = new PDO("sqlite:$dbPath");
 
     $query = "SELECT * FROM videos WHERE id = ?";
@@ -32,7 +32,7 @@ if ($id) {
     <body>
         <header>
             <nav class="cabecalho">
-                <a class="logo" href="../index.html"></a>
+                <a class="logo" href="/"></a>
                 <div class="cabecalho__icones">
                     <a href="./enviar-video.html" class="cabecalho__videos"></a>
                     <a href="../pages/login.html" class="cabecalho__sair">Sair</a>
@@ -41,7 +41,7 @@ if ($id) {
         </header>
         <main class="container">
             <?php if($video) :?>
-                <form class="container__formulario" action="../update_video.php?id=<?= $id ?>" method="post">
+                <form class="container__formulario" method="post">
                     <h2 class="formulario__titulo">Editar vídeo!</h3>
                     <div class="formulario__campo">
                         <label class="campo__etiqueta" for="url">Link embed</label>
@@ -54,7 +54,7 @@ if ($id) {
                     <input class="formulario__botao" type="submit" value="Enviar"/>
                 </form>
             <?php else :?>
-                <form class="container__formulario" action="../insert_video.php" method="post">
+                <form class="container__formulario" method="post">
                     <h2 class="formulario__titulo">Envie um vídeo!</h3>
                     <div class="formulario__campo">
                         <label class="campo__etiqueta" for="url">Link embed</label>

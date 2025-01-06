@@ -5,7 +5,7 @@ $url = filter_input(INPUT_POST, "url", FILTER_VALIDATE_URL);
 $title = filter_input(INPUT_POST, "titulo");
 
 if (!$id || !$url || !$title) {
-    header("Location: index.php?success=0");
+    header("Location: /?success=0");
     exit();   
 }
 
@@ -20,7 +20,7 @@ $stmt->bindValue(3, $id, PDO::PARAM_INT);
 $result = $stmt->execute();
 
 if (!$result) {
-    header("Location: index.php?success=0");
+    header("Location: /?success=0");
     exit(); 
 }
-header("Location: index.php?success=1");
+header("Location: /?success=1");

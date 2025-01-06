@@ -11,6 +11,6 @@ $stmt->bindValue(1, $id, PDO::PARAM_INT);
 $result = $stmt->execute();
 
 if (!$result) {
-    header("Location: /index.php?success=0");
+    header("Location: /?success=0");
 }
-header("Location: /index.php?success=1");
+header("Location: /?success=1");
