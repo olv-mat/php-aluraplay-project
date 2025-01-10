@@ -1,5 +1,8 @@
 <?php
 
+use Project\AluraPlay\Repository\VideoRepository;
+use Project\AluraPlay\Entity\Video;
+
 $dbPath = __DIR__ . "/db.sqlite";
 $conn = new PDO("sqlite:$dbPath");
 
@@ -10,11 +13,9 @@ if (!$url || !$title) {
     exit();
 }
 
-$query = "INSERT INTO videos (url, title) VALUES (?, ?)";
-$stmt = $conn->prepare($query);
-$stmt->bindValue(1, $url);
-$stmt->bindValue(2, $title);
-$result = $stmt->execute();
+$video = new Video(null, $url, $title);
+$repository = new VideoRepository($conn);
+$result = $repository->insertVideo($video);
 
 if (!$result) {
     header("Location: /?success=0");

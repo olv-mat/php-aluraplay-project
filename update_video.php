@@ -1,5 +1,8 @@
 <?php
 
+use Project\AluraPlay\Repository\VideoRepository;
+use Project\AluraPlay\Entity\Video;
+
 $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 $url = filter_input(INPUT_POST, "url", FILTER_VALIDATE_URL);
 $title = filter_input(INPUT_POST, "titulo");
@@ -12,12 +15,9 @@ if (!$id || !$url || !$title) {
 $dbPath = __DIR__ . "/db.sqlite";
 $conn = new PDO("sqlite:$dbPath");
 
-$query = "UPDATE videos SET url = ?, title = ? WHERE id = ?";
-$stmt = $conn->prepare($query);
-$stmt->bindValue(1, $url);
-$stmt->bindValue(2, $title);
-$stmt->bindValue(3, $id, PDO::PARAM_INT);
-$result = $stmt->execute();
+$video = new Video($id, $url, $title);
+$repository = new VideoRepository($conn);
+$result = $repository->updateVideo($video);
 
 if (!$result) {
     header("Location: /?success=0");

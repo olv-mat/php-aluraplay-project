@@ -1,0 +1,17 @@
+{
+    "name": "olv-mat/php-aluraplay-project",
+    "description": "Project developed during one of the Alura platform courses.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Matheus Oliveira",
+            "email": "contamatheusprofissional@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Project\\AluraPlay\\": "src"
+        }
+    }
+}
