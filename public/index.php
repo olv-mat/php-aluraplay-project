@@ -14,19 +14,16 @@ use Project\AluraPlay\Controller\{
 $dbPath = __DIR__ . "/../db.sqlite";
 $conn = new PDO("sqlite:$dbPath");
 $repository = new VideoRepository($conn);
-$route = $_SERVER["PATH_INFO"];
 
-if (empty($route) || $route === "/") {
-    $controller = new VideoListingController($repository);
-    $controller->requestProcessing();
-} else if ($route === "/insert-video") {
-    $controller = new VideoFormInsertController($repository, $_SERVER["REQUEST_METHOD"]);
-    $controller->requestProcessing();
-} else if (strpos($route, "/update-video") !== false) {
-    $controller = new VideoFormUpdateController($repository, $_SERVER["REQUEST_METHOD"]);
-    $controller->requestProcessing();
-} else if (strpos($route, "/delete-video") !== false) {
-    $controller = new DeleteVideoController($repository);
+$routes = require_once __DIR__ . "/../config/routes.php";
+
+$pathInfo = $_SERVER["PATH_INFO"] ?? "/";
+$requestMethod = $_SERVER["REQUEST_METHOD"];
+$route = "$requestMethod|$pathInfo";
+
+if (array_key_exists($route, $routes)) {
+    $controllerClass = $routes[$route];
+    $controller = new $controllerClass($repository, $requestMethod);
     $controller->requestProcessing();
 } else {
     http_response_code(404);

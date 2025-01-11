@@ -10,10 +10,12 @@ class DeleteVideoController implements Controller
 {  
 
     private VideoRepository $repository;
+    private string $requestMethod;
     
-    public function __construct(VideoRepository $repository)
+    public function __construct(VideoRepository $repository, string $requestMethod)
     {
         $this->repository = $repository;
+        $this->requestMethod = $requestMethod;
     }
 
     public function requestProcessing(): void

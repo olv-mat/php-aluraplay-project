@@ -10,17 +10,17 @@ class VideoFormUpdateController implements Controller
 {   
 
     private VideoRepository $repository;
-    private string $method;
+    private string $requestMethod;
 
-    public function __construct($repository, $method)
+    public function __construct(VideoRepository $repository, string $requestMethod)
     {
         $this->repository = $repository;
-        $this->method = $method;
+        $this->requestMethod = $requestMethod;
     }
 
     public function requestProcessing(): void
     {
-        if ($this->method == "POST") {
+        if ($this->requestMethod == "POST") {
 
             $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
             $url = filter_input(INPUT_POST, "url", FILTER_VALIDATE_URL);
@@ -44,39 +44,6 @@ class VideoFormUpdateController implements Controller
         $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
         $video = $this->repository->selectVideo($id);
 
-        require_once __DIR__ . "/../../start_html.php"; ?>
-        <header>
-            <nav class="cabecalho">
-                <a class="logo" href="/"></a>
-                <div class="cabecalho__icones">
-                    <a href="./enviar-video.html" class="cabecalho__videos"></a>
-                    <a href="../pages/login.html" class="cabecalho__sair">Sair</a>
-                </div>
-            </nav>
-        </header>
-        <main class="container">
-            <form class="container__formulario" method="post">
-                <h2 class="formulario__titulo">Editar vídeo!</h2>
-                <div class="formulario__campo">
-                    <label class="campo__etiqueta" for="url">Link embed</label>
-                    <input 
-                        name="url" id="url" 
-                        class="campo__escrita"
-                        value="<?= $video->getUrl(); ?>" 
-                        required />
-                    </div>
-                    <div class="formulario__campo">
-                        <label class="campo__etiqueta" for="titulo">Título do vídeo</label>
-                        <input 
-                        name="titulo" 
-                        id="titulo" 
-                        class="campo__escrita" 
-                        value="<?= $video->getTitle(); ?>"  
-                        required />
-                </div>
-                <input class="formulario__botao" type="submit" value="Enviar" />
-            </form>
-        </main>
-        <?php require_once __DIR__ . "/../../close_html.php";
+        require_once __DIR__ . "/../../views/video_form_update.php";
     }
 }
