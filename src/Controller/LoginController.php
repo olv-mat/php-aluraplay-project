@@ -27,10 +27,15 @@ class LoginController implements Controller
             $stmt->execute();
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
             if (password_verify($password, $userData["password"]) ?? "") {
+                $_SESSION["authenticated"] = true;
                 header("Location: /");
             } else {
                 header("Location: /login?sucess=0");
             }
+        }
+
+        if (array_key_exists("authenticated", $_SESSION)) {
+            header("Location: /");
         }
 
         require_once __DIR__ . "/../../views/login.php";

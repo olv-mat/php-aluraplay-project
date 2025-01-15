@@ -21,6 +21,13 @@ $pathInfo = $_SERVER["PATH_INFO"] ?? "/";
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 $route = "$requestMethod|$pathInfo";
 
+session_start();
+$isLoginRoute = $pathInfo === "/login";
+if (!array_key_exists("authenticated", $_SESSION) && !$isLoginRoute) {
+    header("Location: /login");
+    return;
+}
+
 if (array_key_exists($route, $routes)) {
     $controllerClass = $routes[$route];
     if ($controllerClass == "Project\AluraPlay\Controller\LoginController") {
