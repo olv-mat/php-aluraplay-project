@@ -23,7 +23,11 @@ $route = "$requestMethod|$pathInfo";
 
 if (array_key_exists($route, $routes)) {
     $controllerClass = $routes[$route];
-    $controller = new $controllerClass($repository, $requestMethod);
+    if ($controllerClass == "Project\AluraPlay\Controller\LoginController") {
+        $controller = new $controllerClass($conn, $requestMethod);
+    } else {
+        $controller = new $controllerClass($repository, $requestMethod);
+    }
     $controller->requestProcessing();
 } else {
     http_response_code(404);
