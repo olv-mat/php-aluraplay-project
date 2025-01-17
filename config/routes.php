@@ -7,6 +7,7 @@ use Project\AluraPlay\Controller\{
     VideoFormUpdateController,
     DeleteVideoController,
     LoginController,
+    LogoutController,
 };
 
 return [
@@ -18,4 +19,5 @@ return [
     "GET|/delete-video" => DeleteVideoController::class,
     "GET|/login" => LoginController::class,
     "POST|/login" => LoginController::class,
+    "GET|/logout" => LogoutController::class,
 ];
