@@ -18,10 +18,11 @@ class VideoRepository
     public function insertVideo(Video $video): bool
     {
     
-        $query = "INSERT INTO videos (url, title) VALUES (?, ?)";
+        $query = "INSERT INTO videos (url, title, image_path) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(1, $video->getUrl());
         $stmt->bindValue(2, $video->getTitle());
+        $stmt->bindValue(3, $video->getImagePath());
         return $stmt->execute();
     }
 
@@ -52,6 +53,7 @@ class VideoRepository
                 $video["id"],
                 $video["url"],
                 $video["title"],
+                $video["image_path"],
             );
         }, $videos);
         return $videosArray;
@@ -68,6 +70,7 @@ class VideoRepository
             $video["id"],
             $video["url"],
             $video["title"],
+            $video["image_path"],
         );
         return $videoObj;
     }

@@ -7,12 +7,14 @@ class Video
     private ?int $id;
     private string $url;
     private string $title;
+    private ?string $imagePath;
 
-    public function __construct(?int $id, string $url, string $title)
+    public function __construct(?int $id, string $url, string $title, ?string $imagePath)
     {
         $this->id = $id;
         $this->setUrl($url);
         $this->title = $title;
+        $this->imagePath = $imagePath;
     }
 
     public function getId(): ?int
@@ -48,5 +50,15 @@ class Video
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function setImagePath(string $imagePath): void
+    {
+        $this->imagePath = $imagePath;
     }
 }

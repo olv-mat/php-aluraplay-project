@@ -28,7 +28,15 @@ class VideoFormInsertController implements Controller
                 exit();
             }
 
-            $video = new Video(null, $url, $title);
+            $video = new Video(null, $url, $title, null);
+            if ($_FILES["image"]["error"] === UPLOAD_ERR_OK) {
+                $file = $_FILES["image"]["name"];
+                move_uploaded_file(
+                    $_FILES["image"]["tmp_name"],
+                    __DIR__ . "/../../public/img/uploads/" .  $file
+                );
+                $video->setImagePath($file);
+            }
             $result = $this->repository->insertVideo($video);
 
             if (!$result) {
