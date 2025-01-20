@@ -34,6 +34,14 @@ class VideoRepository
         return $stmt->execute();
     }
 
+    public function deleteVideoBanner(int $id): bool
+    {
+        $query = "UPDATE videos SET image_path = NULL WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(1, $id);
+        return $stmt->execute();
+    }
+
     public function updateVideo(Video $video): bool
     {
         $query = "UPDATE videos SET url = ?, title = ? WHERE id = ?";

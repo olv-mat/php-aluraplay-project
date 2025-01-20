@@ -21,6 +21,7 @@ require_once __DIR__ . "/start_html.php";
                     <h3><?= $video->getTitle(); ?></h3>
                     <div class="acoes-video">
                         <a href="update-video?id=<?= $video->getId(); ?>">Editar</a>
+                        <a href="remove-banner?id=<?= $video->getId(); ?>">Remover capa</a>
                         <a href="delete-video?id=<?= $video->getId(); ?>">Excluir</a>
                     </div>
                 </div>
