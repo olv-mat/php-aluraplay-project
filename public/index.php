@@ -22,6 +22,7 @@ $requestMethod = $_SERVER["REQUEST_METHOD"];
 $route = "$requestMethod|$pathInfo";
 
 session_start();
+session_regenerate_id();
 $isLoginRoute = $pathInfo === "/login";
 if (!array_key_exists("authenticated", $_SESSION) && !$isLoginRoute) {
     header("Location: /login");

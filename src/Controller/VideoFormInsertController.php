@@ -5,6 +5,7 @@ namespace Project\AluraPlay\Controller;
 use Project\AluraPlay\Repository\VideoRepository;
 use Project\AluraPlay\Entity\Video;
 use PDO;
+use finfo;
 
 class VideoFormInsertController implements Controller
 {   
@@ -30,12 +31,18 @@ class VideoFormInsertController implements Controller
 
             $video = new Video(null, $url, $title, null);
             if ($_FILES["image"]["error"] === UPLOAD_ERR_OK) {
-                $file = $_FILES["image"]["name"];
-                move_uploaded_file(
-                    $_FILES["image"]["tmp_name"],
-                    __DIR__ . "/../../public/img/uploads/" .  $file
-                );
-                $video->setImagePath($file);
+
+                $finfo = new finfo(FILEINFO_MIME_TYPE);
+                $fileType = $finfo->file($_FILES["image"]["tmp_name"]);
+
+                if (str_starts_with($fileType, "image/")) {
+                    $file = uniqid("upload_") . "_" . pathinfo($_FILES["image"]["name"], PATHINFO_BASENAME);
+                    move_uploaded_file(
+                        $_FILES["image"]["tmp_name"],
+                        __DIR__ . "/../../public/img/uploads/" .  $file
+                    );
+                    $video->setImagePath($file);
+                }
             }
             $result = $this->repository->insertVideo($video);
 
