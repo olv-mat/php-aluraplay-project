@@ -9,6 +9,8 @@ use Project\AluraPlay\Controller\{
     DeleteVideoController,
     LoginController,
     LogoutController,
+    VideosJsonController,
+    NewVideoJsonController,
 };
 
 return [
@@ -22,4 +24,6 @@ return [
     "GET|/login" => LoginController::class,
     "POST|/login" => LoginController::class,
     "GET|/logout" => LogoutController::class,
+    "GET|/videos-json" => VideosJsonController::class,
+    "POST|/videos" => NewVideoJsonController::class,
 ];

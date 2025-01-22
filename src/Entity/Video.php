@@ -61,4 +61,14 @@ class Video
     {
         $this->imagePath = $imagePath;
     }
+
+    public function toArray(): array
+    {
+        return [
+            "id" => $this->id,
+            "url" => $this->url,
+            "title" => $this->title,
+            "imagePath" => "/img/uploads/" . $this->imagePath,
+        ];
+    }
 }
