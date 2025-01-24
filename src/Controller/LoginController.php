@@ -4,7 +4,7 @@ namespace Project\AluraPlay\Controller;
 
 use PDO;
 
-class LoginController implements Controller
+class LoginController extends ControllerWithHtml implements Controller
 {
     private PDO $conn;
     private string $requestMethod;
@@ -46,6 +46,7 @@ class LoginController implements Controller
             header("Location: /");
         }
 
-        require_once __DIR__ . "/../../views/login.php";
+        $this->renderTemplate("login.php");
+        
     }
 }

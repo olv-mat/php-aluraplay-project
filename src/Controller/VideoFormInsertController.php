@@ -7,7 +7,7 @@ use Project\AluraPlay\Entity\Video;
 use PDO;
 use finfo;
 
-class VideoFormInsertController implements Controller
+class VideoFormInsertController extends ControllerWithHtml implements Controller
 {   
 
     private VideoRepository $repository;
@@ -53,6 +53,6 @@ class VideoFormInsertController implements Controller
             header("Location: /?success=1");
         }
 
-        require_once __DIR__ . "/../../views/video_form_insert.php";
+        $this->renderTemplate("video_form_insert.php");
     }
 }

@@ -6,7 +6,7 @@ use Project\AluraPlay\Repository\VideoRepository;
 use Project\AluraPlay\Entity\Video;
 use PDO;
 
-class VideoListingController implements Controller
+class VideoListingController extends ControllerWithHtml implements Controller
 {
     private VideoRepository $repository;
     private string $requestMethod;
@@ -20,7 +20,10 @@ class VideoListingController implements Controller
     public function requestProcessing(): void
     {
         $videos = $this->repository->selectVideos();
+        $context = [
+            "videos" => $videos,
+        ];
         
-        require_once __DIR__ . "/../../views/video_listing.php";
+        $this->renderTemplate("video_listing.php", $context);
     }
 }

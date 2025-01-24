@@ -6,7 +6,7 @@ use Project\AluraPlay\Repository\VideoRepository;
 use Project\AluraPlay\Entity\Video;
 use PDO;
 
-class VideoFormUpdateController implements Controller
+class VideoFormUpdateController extends ControllerWithHtml implements Controller
 {   
 
     private VideoRepository $repository;
@@ -43,7 +43,11 @@ class VideoFormUpdateController implements Controller
 
         $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
         $video = $this->repository->selectVideo($id);
+        $context = [
+            "video" => $video,
+        ];
+        
+        $this->renderTemplate("video_form_update.php", $context);
 
-        require_once __DIR__ . "/../../views/video_form_update.php";
     }
 }
