@@ -37,16 +37,20 @@ class LoginController extends ControllerWithHtml implements Controller
                 }
                 $_SESSION["authenticated"] = true;
                 header("Location: /");
+                exit();
             } else {
-                header("Location: /login?sucess=0");
+                $_SESSION["error_message"] = "Usuário ou senha inválidos";
+                header("Location: /login");
+                exit();
             }
         }
 
         if (array_key_exists("authenticated", $_SESSION)) {
             header("Location: /");
+            exit();
         }
 
-        $this->renderTemplate("login.php");
+        echo $this->renderTemplate("login.php");
         
     }
 }

@@ -25,7 +25,8 @@ class VideoFormInsertController extends ControllerWithHtml implements Controller
             $url = filter_input(INPUT_POST, "url", FILTER_VALIDATE_URL);
             $title = filter_input(INPUT_POST, "titulo");
             if (!$url || !$title) {
-                header("Location: /?success=0");
+                $_SESSION["error_message"] = "Título ou URL inválidos";
+                header("Location: /insert-video");
                 exit();
             }
 
@@ -47,12 +48,15 @@ class VideoFormInsertController extends ControllerWithHtml implements Controller
             $result = $this->repository->insertVideo($video);
 
             if (!$result) {
-                header("Location: /?success=0");
+                $_SESSION["error_message"] = "Erro cadastrar novo vídeo, tente novamente mais tarde";
+                header("Location: /insert-video");
                 exit();
             }
-            header("Location: /?success=1");
+            $_SESSION["success_message"] = "Vídeo cadastrado com sucesso";
+            header("Location: /");
+            exit();
         }
 
-        $this->renderTemplate("video_form_insert.php");
+        echo $this->renderTemplate("video_form_insert.php");
     }
 }

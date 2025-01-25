@@ -27,7 +27,8 @@ class VideoFormUpdateController extends ControllerWithHtml implements Controller
             $title = filter_input(INPUT_POST, "titulo");
 
             if (!$id || !$url || !$title) {
-                header("Location: /?success=0");
+                $_SESSION["error_message"] = "Título ou URL inválidos";
+                header("Location: /");
                 exit();   
             }
 
@@ -35,10 +36,13 @@ class VideoFormUpdateController extends ControllerWithHtml implements Controller
             $result = $this->repository->updateVideo($video);
 
             if (!$result) {
-                header("Location: /?success=0");
+                $_SESSION["error_message"] = "Erro ao editar o vídeo, tente novamente mais tarde";
+                header("Location: /");
                 exit(); 
             }
-            header("Location: /?success=1");
+            $_SESSION["success_message"] = "Vídeo atualizado com sucesso";
+            header("Location: /");
+            exit();
         }
 
         $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
@@ -47,7 +51,7 @@ class VideoFormUpdateController extends ControllerWithHtml implements Controller
             "video" => $video,
         ];
         
-        $this->renderTemplate("video_form_update.php", $context);
+        echo $this->renderTemplate("video_form_update.php", $context);
 
     }
 }

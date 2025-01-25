@@ -24,9 +24,13 @@ class DeleteVideoController implements Controller
         $result = $this->repository->deleteVideo($id);
 
         if (!$result) {
-            header("Location: /?success=0");
+            $_SESSION["error_message"] = "Erro ao deletar o vídeo";
+            header("Location: /");
+            exit();
         }
-        header("Location: /?success=1");
+        $_SESSION["success_message"] = "Vídeo deleteado com sucesso";
+        header("Location: /");
+        exit();
           
     }
 }

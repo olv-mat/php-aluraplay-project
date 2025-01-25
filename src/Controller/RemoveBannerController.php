@@ -23,9 +23,13 @@ class RemoveBannerController implements Controller
         $result = $this->repository->deleteVideoBanner($id);
 
         if (!$result) {
-            header("Location: /?success=0");
+            $_SESSION["error_message"] = "Erro ao remover a capa do vídeo, tente novamente mais tarde";
+            header("Location: /");
+            exit();
         }
-        header("Location: /?success=1");
+        $_SESSION["success_message"] = "Capa do vídeo removida com sucesso";
+        header("Location: /");
+        exit();
           
     }
 }

@@ -8,5 +8,6 @@ class LogoutController implements Controller
     {
         session_destroy();
         header("Location: /login");
+        exit();
     }
 }

@@ -22,3 +22,14 @@
                 </div>
             </nav>
         </header>
+        <?php if (isset($_SESSION["error_message"])): ?>
+            <h2 class="formulario__titulo erro">
+                <?= $_SESSION["error_message"]; ?>
+                <?php unset($_SESSION["error_message"]); ?>
+            </h2>
+        <?php elseif (isset($_SESSION["success_message"])) :?>
+            <h2 class="formulario__titulo sucesso">
+                <?= $_SESSION["success_message"]; ?>
+                <?php unset($_SESSION["success_message"]); ?>
+            </h2>
+        <?php endif; ?>

@@ -24,6 +24,6 @@ class VideoListingController extends ControllerWithHtml implements Controller
             "videos" => $videos,
         ];
         
-        $this->renderTemplate("video_listing.php", $context);
+        echo $this->renderTemplate("video_listing.php", $context);
     }
 }
