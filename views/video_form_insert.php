@@ -1,36 +1,35 @@
 <?php
 require_once __DIR__ . "/start_html.php"; 
 ?>
-<main class="container">
-    <form class="container__formulario" method="post" enctype="multipart/form-data">
-        <h2 class="formulario__titulo">Envie seu vídeo!</h2>
-        <div class="formulario__campo">
-            <label class="campo__etiqueta" for="url">Link embed</label>
+<main>
+    <form method="post" enctype="multipart/form-data" class="form-container">
+        <h1>Adicionar vídeo</h1>
+        <div class="field-container flex-row align-center">
+            <label for="url" class="right-spacing">Link do vídeo</label>
             <input 
-                name="url" id="url" 
-                class="campo__escrita" 
+                name="url" 
+                id="url" 
                 placeholder="Por exemplo: https://www.youtube.com/embed/FAY1K2aUg5g" 
                 required />
         </div>
-        <div class="formulario__campo">
-            <label class="campo__etiqueta" for="titulo">Título do vídeo</label>
+        <div class="field-container flex-row align-center">
+            <label for="titulo" class="right-spacing">Título do vídeo</label>
             <input 
                 name="titulo" 
-                id="titulo" 
-                class="campo__escrita" 
+                id="titulo"  
                 placeholder="Neste campo, dê o nome do vídeo" 
                 required />
         </div>
-        <div class="formulario__campo">
-            <label class="campo__etiqueta" for="image">Imagem do vídeo</label>
+        <div class="field-container flex-row align-center">
+            <label for="image" class="right-spacing btn">Selecionar imagem</label>
             <input
                 type="file"
                 accept="image/*" 
                 name="image" 
                 id="image" 
-                class="campo__escrita" />
+                class="file-input" />
         </div>
-        <input class="formulario__botao" type="submit" value="Enviar" />
+        <button class="btn form-btn" type="submit">Cadastrar</button>
     </form>
 </main>
 <?php require_once __DIR__ . "/close_html.php";
