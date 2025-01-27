@@ -4,10 +4,13 @@ namespace Project\AluraPlay\Controller;
 
 use Project\AluraPlay\Repository\VideoRepository;
 use Project\AluraPlay\Entity\Video;
+use Project\AluraPlay\Helper\FlashMessageTrait;
 use PDO;
 
 class RemoveBannerController implements Controller
 {
+    use FlashMessageTrait;
+
     private VideoRepository $repository;
     private string $requestMethod;
 
@@ -23,11 +26,11 @@ class RemoveBannerController implements Controller
         $result = $this->repository->deleteVideoBanner($id);
 
         if (!$result) {
-            $_SESSION["error_message"] = "Erro ao remover a capa do vídeo, tente novamente mais tarde";
+            $this->addErrorMessage("Erro ao remover a capa do vídeo, tente novamente mais tarde");
             header("Location: /");
             exit();
         }
-        $_SESSION["success_message"] = "Capa do vídeo removida com sucesso";
+        $this->addSuccessMessage("Capa do vídeo removida com sucesso");
         header("Location: /");
         exit();
           

@@ -4,11 +4,16 @@ namespace Project\AluraPlay\Controller;
 
 use Project\AluraPlay\Repository\VideoRepository;
 use Project\AluraPlay\Entity\Video;
+use Project\AluraPlay\Helper\{
+    FlashMessageTrait, HtmlRendererTrait
+};
 use PDO;
 use finfo;
 
-class VideoFormInsertController extends ControllerWithHtml implements Controller
+class VideoFormInsertController implements Controller
 {   
+    use FlashMessageTrait;
+    use HtmlRendererTrait;
 
     private VideoRepository $repository;
     private string $requestMethod;
@@ -25,7 +30,7 @@ class VideoFormInsertController extends ControllerWithHtml implements Controller
             $url = filter_input(INPUT_POST, "url", FILTER_VALIDATE_URL);
             $title = filter_input(INPUT_POST, "titulo");
             if (!$url || !$title) {
-                $_SESSION["error_message"] = "Título ou URL inválidos";
+                $this->addErrorMessage("Título ou URL inválidos");
                 header("Location: /insert-video");
                 exit();
             }
@@ -48,11 +53,11 @@ class VideoFormInsertController extends ControllerWithHtml implements Controller
             $result = $this->repository->insertVideo($video);
 
             if (!$result) {
-                $_SESSION["error_message"] = "Erro cadastrar novo vídeo, tente novamente mais tarde";
+                $this->addErrorMessage("Erro cadastrar novo vídeo, tente novamente mais tarde");
                 header("Location: /insert-video");
                 exit();
             }
-            $_SESSION["success_message"] = "Vídeo cadastrado com sucesso";
+            $this->addSuccessMessage("Vídeo cadastrado com sucesso");
             header("Location: /");
             exit();
         }

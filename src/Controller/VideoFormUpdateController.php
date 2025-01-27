@@ -4,10 +4,15 @@ namespace Project\AluraPlay\Controller;
 
 use Project\AluraPlay\Repository\VideoRepository;
 use Project\AluraPlay\Entity\Video;
+use Project\AluraPlay\Helper\{
+    FlashMessageTrait, HtmlRendererTrait
+};
 use PDO;
 
-class VideoFormUpdateController extends ControllerWithHtml implements Controller
+class VideoFormUpdateController implements Controller
 {   
+    use FlashMessageTrait;
+    use HtmlRendererTrait;
 
     private VideoRepository $repository;
     private string $requestMethod;
@@ -27,7 +32,7 @@ class VideoFormUpdateController extends ControllerWithHtml implements Controller
             $title = filter_input(INPUT_POST, "titulo");
 
             if (!$id || !$url || !$title) {
-                $_SESSION["error_message"] = "Título ou URL inválidos";
+                $this->addErrorMessage("Título ou URL inválidos");
                 header("Location: /");
                 exit();   
             }
@@ -36,11 +41,11 @@ class VideoFormUpdateController extends ControllerWithHtml implements Controller
             $result = $this->repository->updateVideo($video);
 
             if (!$result) {
-                $_SESSION["error_message"] = "Erro ao editar o vídeo, tente novamente mais tarde";
+                $this->addErrorMessage("Erro ao editar o vídeo, tente novamente mais tarde");
                 header("Location: /");
                 exit(); 
             }
-            $_SESSION["success_message"] = "Vídeo atualizado com sucesso";
+            $this->addSuccessMessage("Vídeo atualizado com sucesso");
             header("Location: /");
             exit();
         }

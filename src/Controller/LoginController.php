@@ -3,9 +3,16 @@
 namespace Project\AluraPlay\Controller;
 
 use PDO;
+use Project\AluraPlay\Helper\{
+    FlashMessageTrait, 
+    HtmlRendererTrait
+};
 
-class LoginController extends ControllerWithHtml implements Controller
+class LoginController implements Controller
 {
+    use FlashMessageTrait;
+    use HtmlRendererTrait;
+
     private PDO $conn;
     private string $requestMethod;
 
@@ -39,7 +46,7 @@ class LoginController extends ControllerWithHtml implements Controller
                 header("Location: /");
                 exit();
             } else {
-                $_SESSION["error_message"] = "Usuário ou senha inválidos";
+                $this->addErrorMessage("Usuário ou senha inválidos");
                 header("Location: /login");
                 exit();
             }

@@ -4,10 +4,13 @@ namespace Project\AluraPlay\Controller;
 
 use Project\AluraPlay\Repository\VideoRepository;
 use Project\AluraPlay\Entity\Video;
+use Project\AluraPlay\Helper\HtmlRendererTrait;
 use PDO;
 
-class VideoListingController extends ControllerWithHtml implements Controller
+class VideoListingController implements Controller
 {
+    use HtmlRendererTrait;
+
     private VideoRepository $repository;
     private string $requestMethod;
 
