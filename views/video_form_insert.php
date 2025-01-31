@@ -1,6 +1,4 @@
-<?php
-require_once __DIR__ . "/start_html.php"; 
-?>
+<?php $this->layout("template"); ?>
 <main>
     <form method="post" enctype="multipart/form-data" class="form-container">
         <h1>Adicionar vídeo</h1>
@@ -32,4 +30,3 @@ require_once __DIR__ . "/start_html.php";
         <button class="btn form-btn" type="submit">Cadastrar</button>
     </form>
 </main>
-<?php require_once __DIR__ . "/close_html.php";

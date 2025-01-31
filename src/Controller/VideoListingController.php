@@ -4,20 +4,21 @@ namespace Project\AluraPlay\Controller;
 
 use Project\AluraPlay\Repository\VideoRepository;
 use Project\AluraPlay\Entity\Video;
-use Project\AluraPlay\Helper\HtmlRendererTrait;
+use League\Plates\Engine;
 use PDO;
 
 class VideoListingController implements Controller
 {
-    use HtmlRendererTrait;
-
+    
     private VideoRepository $repository;
     private string $requestMethod;
+    private Engine $template;
 
-    public function __construct(VideoRepository $repository, string $requestMethod)
+    public function __construct(VideoRepository $repository, string $requestMethod, Engine $template)
     {
         $this->repository = $repository;
-        $this->requestMethod = $requestMethod;   
+        $this->requestMethod = $requestMethod;
+        $this->template = $template;   
     }
 
     public function requestProcessing(): void
@@ -27,6 +28,6 @@ class VideoListingController implements Controller
             "videos" => $videos,
         ];
         
-        echo $this->renderTemplate("video_listing.php", $context);
+        echo $this->template->render("video_listing", $context);
     }
 }

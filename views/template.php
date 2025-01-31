@@ -33,3 +33,6 @@
                 <?php unset($_SESSION["success_message"]); ?>
             </p>
         <?php endif; ?>
+        <?= $this->section("content"); ?>
+    </body>
+</html>

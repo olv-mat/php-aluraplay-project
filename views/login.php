@@ -1,6 +1,4 @@
-<?php
-require_once __DIR__ . "/start_html.php";
-?>
+<?php $this->layout("template"); ?>
 <main>
     <form method="post" class="form-container">
         <h1>Acesse sua conta</h1>
@@ -27,4 +25,3 @@ require_once __DIR__ . "/start_html.php";
         <button class="btn" type="submit">Entrar</button>
     </form>
 </main>
-<?php require_once __DIR__ . "/close_html.php";

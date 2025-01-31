@@ -8,10 +8,12 @@
             "email": "contamatheusprofissional@gmail.com"
         }
     ],
-    "require": {},
     "autoload": {
         "psr-4": {
             "Project\\AluraPlay\\": "src"
         }
+    },
+    "require": {
+        "league/plates": "^3.6"
     }
 }

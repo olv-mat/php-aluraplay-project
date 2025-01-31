@@ -3,23 +3,22 @@
 namespace Project\AluraPlay\Controller;
 
 use PDO;
-use Project\AluraPlay\Helper\{
-    FlashMessageTrait, 
-    HtmlRendererTrait
-};
+use League\Plates\Engine;
+use Project\AluraPlay\Helper\FlashMessageTrait;
 
 class LoginController implements Controller
 {
     use FlashMessageTrait;
-    use HtmlRendererTrait;
 
     private PDO $conn;
     private string $requestMethod;
+    private Engine $template;
 
-    public function __construct(PDO $conn, string $requestMethod)
+    public function __construct(PDO $conn, string $requestMethod, Engine $template)
     {
         $this->conn = $conn;
         $this->requestMethod = $requestMethod;
+        $this->template = $template;
     }
 
     public function requestProcessing(): void
@@ -57,7 +56,7 @@ class LoginController implements Controller
             exit();
         }
 
-        echo $this->renderTemplate("login.php");
+        echo $this->template->render("login");
         
     }
 }

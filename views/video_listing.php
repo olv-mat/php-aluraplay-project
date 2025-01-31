@@ -1,6 +1,4 @@
-<?php
-require_once __DIR__ . "/start_html.php"; 
-?>
+<?php $this->layout("template"); ?>
 <main>
     <ul class="videos-container">
         <?php foreach($videos as $video) :?>
@@ -31,4 +29,3 @@ require_once __DIR__ . "/start_html.php";
         <?php endforeach; ?>
     </ul>
 </main>
-<?php require_once __DIR__ . "/close_html.php";

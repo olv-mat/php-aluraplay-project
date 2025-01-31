@@ -3,6 +3,7 @@
 require __DIR__ . "/../vendor/autoload.php";
 
 use Project\AluraPlay\Repository\VideoRepository;
+use League\Plates\Engine;
 use Project\AluraPlay\Controller\{
     Controller,
     VideoListingController, 
@@ -10,6 +11,9 @@ use Project\AluraPlay\Controller\{
     VideoFormUpdateController,
     DeleteVideoController,
 };
+
+$templatesPath = __DIR__ . "/../views";
+$template = new Engine($templatesPath);
 
 $dbPath = __DIR__ . "/../db.sqlite";
 $conn = new PDO("sqlite:$dbPath");
@@ -32,9 +36,9 @@ if (!array_key_exists("authenticated", $_SESSION) && !$isLoginRoute) {
 if (array_key_exists($route, $routes)) {
     $controllerClass = $routes[$route];
     if ($controllerClass == "Project\AluraPlay\Controller\LoginController") {
-        $controller = new $controllerClass($conn, $requestMethod);
+        $controller = new $controllerClass($conn, $requestMethod, $template);
     } else {
-        $controller = new $controllerClass($repository, $requestMethod);
+        $controller = new $controllerClass($repository, $requestMethod, $template);
     }
     $controller->requestProcessing();
 } else {

@@ -4,23 +4,23 @@ namespace Project\AluraPlay\Controller;
 
 use Project\AluraPlay\Repository\VideoRepository;
 use Project\AluraPlay\Entity\Video;
-use Project\AluraPlay\Helper\{
-    FlashMessageTrait, HtmlRendererTrait
-};
+use League\Plates\Engine;
+use Project\AluraPlay\Helper\FlashMessageTrait;
 use PDO;
 
 class VideoFormUpdateController implements Controller
 {   
     use FlashMessageTrait;
-    use HtmlRendererTrait;
 
     private VideoRepository $repository;
     private string $requestMethod;
+    private Engine $template;
 
-    public function __construct(VideoRepository $repository, string $requestMethod)
+    public function __construct(VideoRepository $repository, string $requestMethod, Engine $template)
     {
         $this->repository = $repository;
         $this->requestMethod = $requestMethod;
+        $this->template = $template;
     }
 
     public function requestProcessing(): void
@@ -56,7 +56,7 @@ class VideoFormUpdateController implements Controller
             "video" => $video,
         ];
         
-        echo $this->renderTemplate("video_form_update.php", $context);
+        echo $this->template->render("video_form_update", $context);
 
     }
 }
