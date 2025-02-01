@@ -2,5 +2,6 @@ USE myplayer;
 CREATE TABLE IF NOT EXISTS videos (
     id INT AUTO_INCREMENT PRIMARY KEY, 
     url VARCHAR(2083) NOT NULL, 
-    title VARCHAR(255) NOT NULL
+    title VARCHAR(255) NOT NULL,
+    image_path VARCHAR(255)
 );

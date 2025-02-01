@@ -4,11 +4,10 @@ namespace Project\MyPlayer\Model\Repository;
 
 use Project\MyPlayer\Model\Entity\Video;
 use PDO;
-use PDOStatement;
 
 class VideoRepository
 {
-    private $conn;
+    private PDO $conn;
     
     public function __construct(PDO $conn)
     {
