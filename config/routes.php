@@ -1,6 +1,6 @@
 <?php
 
-use Project\AluraPlay\Controller\{
+use Project\MyPlayer\Controller\{
     Controller,
     VideoListingController, 
     VideoFormInsertController,

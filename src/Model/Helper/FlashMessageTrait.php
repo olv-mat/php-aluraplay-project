@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\AluraPlay\Helper;
+namespace Project\MyPlayer\Model\Helper;
 
 trait FlashMessageTrait
 {

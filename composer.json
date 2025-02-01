@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Project\\AluraPlay\\": "src"
+            "Project\\MyPlayer\\": "src"
         }
     },
     "require": {

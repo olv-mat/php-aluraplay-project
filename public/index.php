@@ -2,16 +2,16 @@
 
 require __DIR__ . "/../vendor/autoload.php";
 
-use Project\AluraPlay\Repository\VideoRepository;
+use Project\MyPlayer\Model\Repository\VideoRepository;
 use League\Plates\Engine;
-use Project\AluraPlay\Controller\{
+use Project\MyPlayer\Controller\{
     Controller,
     VideoListingController, 
     VideoFormInsertController,
     VideoFormUpdateController,
     DeleteVideoController,
 };
-use Project\AluraPlay\Infrastructure\ConnectionCreator;
+use Project\MyPlayer\Model\Infrastructure\ConnectionCreator;
 
 $templatesPath = __DIR__ . "/../views";
 $template = new Engine($templatesPath);
@@ -36,7 +36,7 @@ if (!array_key_exists("authenticated", $_SESSION) && !$isLoginRoute) {
 
 if (array_key_exists($route, $routes)) {
     $controllerClass = $routes[$route];
-    if ($controllerClass == "Project\AluraPlay\Controller\LoginController") {
+    if ($controllerClass == "Project\MyPlayer\Controller\LoginController") {
         $controller = new $controllerClass($conn, $requestMethod, $template);
     } else {
         $controller = new $controllerClass($repository, $requestMethod, $template);

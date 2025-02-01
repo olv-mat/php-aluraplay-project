@@ -1,9 +1,9 @@
 <?php
 
-namespace Project\AluraPlay\Controller;
+namespace Project\MyPlayer\Controller;
 
-use Project\AluraPlay\Repository\VideoRepository;
-use Project\AluraPlay\Entity\Video;
+use Project\MyPlayer\Model\Repository\VideoRepository;
+use Project\MyPlayer\Model\Entity\Video;
 use League\Plates\Engine;
 use PDO;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\AluraPlay\Entity;
+namespace Project\MyPlayer\Model\Entity;
 
 class Video
 {

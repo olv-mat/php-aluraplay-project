@@ -1,10 +1,10 @@
 <?php
 
-namespace Project\AluraPlay\Controller;
+namespace Project\MyPlayer\Controller;
 
 use PDO;
 use League\Plates\Engine;
-use Project\AluraPlay\Helper\FlashMessageTrait;
+use Project\MyPlayer\Model\Helper\FlashMessageTrait;
 
 class LoginController implements Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Project\AluraPlay\Controller;
+namespace Project\MyPlayer\Controller;
 
 interface Controller
 {

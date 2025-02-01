@@ -1,8 +1,8 @@
 <?php
 
-namespace Project\AluraPlay\Repository;
+namespace Project\MyPlayer\Model\Repository;
 
-use Project\AluraPlay\Entity\Video;
+use Project\MyPlayer\Model\Entity\Video;
 use PDO;
 use PDOStatement;
 
