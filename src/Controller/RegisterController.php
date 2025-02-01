@@ -2,8 +2,8 @@
 
 namespace Project\MyPlayer\Controller;
 
-use Project\MyPlayer\Model\Repository\UserRepository;
 use Project\MyPlayer\Model\Helper\FlashMessageTrait;
+use Project\MyPlayer\Model\Repository\UserRepository;
 use League\Plates\Engine;
 
 class RegisterController implements Controller

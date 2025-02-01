@@ -2,11 +2,9 @@
 
 namespace Project\MyPlayer\Controller;
 
-use Project\MyPlayer\Model\Repository\VideoRepository;
-use Project\MyPlayer\Model\Entity\Video;
 use Project\MyPlayer\Model\Helper\FlashMessageTrait;
+use Project\MyPlayer\Model\Repository\VideoRepository;
 use League\Plates\Engine;
-use PDO;
 
 class RemoveBannerController implements Controller
 {
@@ -29,11 +27,11 @@ class RemoveBannerController implements Controller
         $result = $this->repository->deleteVideoBanner($id);
 
         if (!$result) {
-            $this->addErrorMessage("Erro ao remover a capa do vídeo, tente novamente mais tarde");
+            $this->addErrorMessage("Erro ao deletar a capa do vídeo");
             header("Location: /");
             exit();
         }
-        $this->addSuccessMessage("Capa do vídeo removida com sucesso");
+        $this->addSuccessMessage("Capa deletada");
         header("Location: /");
         exit();
           

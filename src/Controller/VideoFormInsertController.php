@@ -2,11 +2,10 @@
 
 namespace Project\MyPlayer\Controller;
 
+use Project\MyPlayer\Model\Helper\FlashMessageTrait;
 use Project\MyPlayer\Model\Repository\VideoRepository;
 use Project\MyPlayer\Model\Entity\Video;
 use League\Plates\Engine;
-use Project\MyPlayer\Model\Helper\FlashMessageTrait;
-use PDO;
 use finfo;
 
 class VideoFormInsertController implements Controller
@@ -28,7 +27,7 @@ class VideoFormInsertController implements Controller
     {
         if ($this->requestMethod == "POST") {
             $url = filter_input(INPUT_POST, "url", FILTER_VALIDATE_URL);
-            $title = filter_input(INPUT_POST, "titulo");
+            $title = filter_input(INPUT_POST, "title");
             if (!$url || !$title) {
                 $this->addErrorMessage("Título ou URL inválidos");
                 header("Location: /insert-video");
@@ -53,11 +52,11 @@ class VideoFormInsertController implements Controller
             $result = $this->repository->insertVideo($video);
 
             if (!$result) {
-                $this->addErrorMessage("Erro cadastrar novo vídeo, tente novamente mais tarde");
+                $this->addErrorMessage("Erro cadastrar novo vídeo");
                 header("Location: /insert-video");
                 exit();
             }
-            $this->addSuccessMessage("Vídeo cadastrado com sucesso");
+            $this->addSuccessMessage("Vídeo cadastrado");
             header("Location: /");
             exit();
         }

@@ -36,9 +36,6 @@ class Video
 
     public function setUrl(string $url): void
     {
-        if (!filter_var($url, FILTER_VALIDATE_URL)){
-            throw new \InvalidArgumentException();
-        }
         $this->url = $url;
     }
 

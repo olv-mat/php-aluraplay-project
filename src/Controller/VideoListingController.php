@@ -3,9 +3,7 @@
 namespace Project\MyPlayer\Controller;
 
 use Project\MyPlayer\Model\Repository\VideoRepository;
-use Project\MyPlayer\Model\Entity\Video;
 use League\Plates\Engine;
-use PDO;
 
 class VideoListingController implements Controller
 {

@@ -2,11 +2,10 @@
 
 namespace Project\MyPlayer\Controller;
 
+use Project\MyPlayer\Model\Helper\FlashMessageTrait;
 use Project\MyPlayer\Model\Repository\VideoRepository;
 use Project\MyPlayer\Model\Entity\Video;
 use League\Plates\Engine;
-use Project\MyPlayer\Model\Helper\FlashMessageTrait;
-use PDO;
 
 class VideoFormUpdateController implements Controller
 {   
@@ -29,7 +28,7 @@ class VideoFormUpdateController implements Controller
 
             $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
             $url = filter_input(INPUT_POST, "url", FILTER_VALIDATE_URL);
-            $title = filter_input(INPUT_POST, "titulo");
+            $title = filter_input(INPUT_POST, "title");
 
             if (!$id || !$url || !$title) {
                 $this->addErrorMessage("Título ou URL inválidos");
@@ -41,11 +40,11 @@ class VideoFormUpdateController implements Controller
             $result = $this->repository->updateVideo($video);
 
             if (!$result) {
-                $this->addErrorMessage("Erro ao editar o vídeo, tente novamente mais tarde");
+                $this->addErrorMessage("Erro ao editar o vídeo");
                 header("Location: /");
                 exit(); 
             }
-            $this->addSuccessMessage("Vídeo atualizado com sucesso");
+            $this->addSuccessMessage("Vídeo editado");
             header("Location: /");
             exit();
         }

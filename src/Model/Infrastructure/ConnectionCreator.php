@@ -13,10 +13,10 @@ class ConnectionCreator
         $dotenvPath = __DIR__ . "/../../../";
         $dotenv = Dotenv::createImmutable($dotenvPath)->load();
     
-        $databaseHost = $_ENV['HOST'];
-        $databaseName = $_ENV['DATABASE_NAME'];
-        $databaseUser = $_ENV['DATABASE_USER'];
-        $databasePassword = $_ENV['DATABASE_PASSWORD'];
+        $databaseHost = $_ENV["HOST"];
+        $databaseName = $_ENV["DATABASE_NAME"];
+        $databaseUser = $_ENV["DATABASE_USER"];
+        $databasePassword = $_ENV["DATABASE_PASSWORD"];
         $databasePath = "mysql:host=$databaseHost;dbname=$databaseName";
         
         $conn = new PDO($databasePath, $databaseUser, $databasePassword);

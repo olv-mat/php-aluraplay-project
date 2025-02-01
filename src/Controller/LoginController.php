@@ -2,8 +2,8 @@
 
 namespace Project\MyPlayer\Controller;
 
-use Project\MyPlayer\Model\Repository\UserRepository;
 use Project\MyPlayer\Model\Helper\FlashMessageTrait;
+use Project\MyPlayer\Model\Repository\UserRepository;
 use League\Plates\Engine;
 
 class LoginController implements Controller
@@ -35,7 +35,7 @@ class LoginController implements Controller
                 exit();
             }
 
-            if (password_verify($password, $user->getPassword()) ?? "") {
+            if (password_verify($password, $user->getPassword())) {
                 if (password_needs_rehash($user->getPassword(), PASSWORD_ARGON2ID)) {
                     $this->repository->reHashPassword($password, $user->getId());
                 }

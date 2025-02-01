@@ -2,13 +2,13 @@
 
 namespace Project\MyPlayer\Controller;
 
+use Project\MyPlayer\Model\Helper\FlashMessageTrait;
 use Project\MyPlayer\Model\Repository\VideoRepository;
-use Project\MyPlayer\Model\Entity\Video;
 use League\Plates\Engine;
-use PDO;
 
 class DeleteVideoController implements Controller
 {  
+    use FlashMessageTrait;
 
     private VideoRepository $repository;
     private string $requestMethod;
@@ -27,11 +27,11 @@ class DeleteVideoController implements Controller
         $result = $this->repository->deleteVideo($id);
 
         if (!$result) {
-            $_SESSION["error_message"] = "Erro ao deletar o vídeo";
+            $this->addErrorMessage("Erro ao deletar o vídeo");
             header("Location: /");
             exit();
         }
-        $_SESSION["success_message"] = "Vídeo deleteado com sucesso";
+        $this->addErrorMessage("Vídeo deleteado");
         header("Location: /");
         exit();
           
