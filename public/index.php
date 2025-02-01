@@ -11,12 +11,13 @@ use Project\AluraPlay\Controller\{
     VideoFormUpdateController,
     DeleteVideoController,
 };
+use Project\AluraPlay\Infrastructure\ConnectionCreator;
 
 $templatesPath = __DIR__ . "/../views";
 $template = new Engine($templatesPath);
 
-$dbPath = __DIR__ . "/../db.sqlite";
-$conn = new PDO("sqlite:$dbPath");
+
+$conn = ConnectionCreator::createConnection();
 $repository = new VideoRepository($conn);
 
 $routes = require_once __DIR__ . "/../config/routes.php";
