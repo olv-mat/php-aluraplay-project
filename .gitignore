@@ -1,3 +1,4 @@
 db.sqlite
 /vendor/
 manage_users.php
+.env
