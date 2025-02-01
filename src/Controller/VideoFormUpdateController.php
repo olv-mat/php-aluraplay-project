@@ -37,7 +37,7 @@ class VideoFormUpdateController implements Controller
                 exit();   
             }
 
-            $video = new Video($id, $url, $title);
+            $video = new Video($id, $url, $title, null);
             $result = $this->repository->updateVideo($video);
 
             if (!$result) {
